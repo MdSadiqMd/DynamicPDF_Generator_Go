@@ -9,9 +9,13 @@ import (
 
 func main() {
 	pdf := gofpdf.New(gofpdf.OrientationPortrait, gofpdf.UnitPoint, gofpdf.PageSizeA4, "")
+	w, h := pdf.GetPageSize()
+	fmt.Println(w, h)
+
 	pdf.AddPage()
-	pdf.SetFont("Arial", "B", 16)
-	pdf.Cell(40, 10, "Hello, world!")
+	pdf.SetFont("Arial", "B", 38)
+	_, lineHeight := pdf.GetFontSize()
+	pdf.Cell(w, lineHeight, "Hello World!")
 	err := pdf.OutputFileAndClose("hello.pdf")
 	if err != nil {
 		log.Fatal(err)
